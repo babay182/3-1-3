@@ -33,13 +33,10 @@ public class AddAdminAndRoleToDataBase {
         Set<Role> usersSet = new HashSet<>();
         usersSet.add(roleUser);
         // create Admin
-        User admin = new User("Zhalaldin", "Toichubaev", (byte)20, "Zhalal@mail.ru", "admin", new HashSet<>(roleService.getAllRoles()));
+        User admin = new User("Vasyu", "Adminov", (byte)20, "Admin", "Admin", new HashSet<>(roleService.getAllRoles()));
         // create Users
-        User user = new User("Igor", "Ptushkin",(byte)27, "Igorek@mail.ru","igorek", usersSet);
-        User user2 = new User("Elena", "Sherbakova",(byte)25, "Elena@mail.ru","elena", usersSet);
-        // save people
+
         userService.add(admin);
-        userService.add(user);
-        userService.add(user2);
+
     }
 }
