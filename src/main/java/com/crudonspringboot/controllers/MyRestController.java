@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class MyRestController {
     private final UserService userService;
     private final RoleService roleService;
@@ -23,39 +23,39 @@ public class MyRestController {
         this.roleService = roleService;
     }
 
-    @GetMapping("/admin")
+    @GetMapping
     public ResponseEntity<List<User>> getAllUsers(){
         List<User> users = userService.getAllUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+        return ResponseEntity.ok().body(users);
     }
 
-    @PostMapping("/admin")
+    @PostMapping
     public ResponseEntity<User> addUser(@RequestBody User user) {
         userService.add(user);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return ResponseEntity.ok().body(user);
     }
 
-    @GetMapping("/admin/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable int id) {
         User user = userService.getById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @GetMapping("/admin/roles")
+    @GetMapping("/roles")
     public ResponseEntity<List<Role>> getAllRoles() {
         List<Role> roles = new ArrayList<>(roleService.getAllRoles());
-        return new ResponseEntity<>(roles, HttpStatus.OK);
+        return ResponseEntity.ok().body(roles);
     }
 
-    @PutMapping("/admin")
+    @PutMapping
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         userService.update(user);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return ResponseEntity.ok().body(user);
     }
 
-    @DeleteMapping("/admin/{id}")
-    public ResponseEntity<User> deleteUser(@PathVariable int id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable int id) {
         userService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok().body(HttpStatus.OK);
     }
 }
